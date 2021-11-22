@@ -8,34 +8,33 @@ import android.os.Bundle;
 import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
-     public static  final String TAG="ACTIVITY";
-     public MediaPlayer player;
-     public int i;
+    public static final String TAG = "ACTIVITY";
+    public MediaPlayer player;
+    public int i;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        player=new MediaPlayer();
-
-        player=MediaPlayer.create(this,R.raw.yeulaccuoi);
+        player = new MediaPlayer();
+        player = MediaPlayer.create(this, R.raw.yeulaccuoi);
 
     }
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        Log.e(TAG,"onSaveInstanceState");
-        outState.putInt("nhac",player.getCurrentPosition());
-        Log.e(TAG,""+player.getCurrentPosition());
+        Log.e(TAG, "onSaveInstanceState");
+        outState.putInt("nhac", player.getCurrentPosition());
+        Log.e(TAG, "" + player.getCurrentPosition());
 
     }
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        Log.e(TAG,"onRestoreInstanceState");
-        i=savedInstanceState.getInt("nhac");
-        player.seekTo(i);
+        Log.e(TAG, "onRestoreInstanceState");
+
 
     }
 
@@ -43,13 +42,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         player.start();
-        Log.e(TAG,"onstart");
+        Log.e(TAG, "onstart");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.e(TAG,"onResume");
+        Log.e(TAG, "onResume");
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        player.stop();
+        player.release();
     }
 }
