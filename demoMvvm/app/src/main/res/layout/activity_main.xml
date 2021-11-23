@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="LoginViewModel"
+            type="com.example.demomvvm.LoginViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/ed_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:text="@={LoginViewModel.email}" />
+
+        <EditText
+            android:id="@+id/ed_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Pass"
+            android:inputType="textPassword"
+            android:text="@={LoginViewModel.pass}" />
+
+        <TextView
+            android:id="@+id/tv_thongbao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{LoginViewModel.messager}"
+            android:textColor="@{LoginViewModel.isSuccess ? @color/teal_200:@color/purple_200}"
+            android:visibility="@{LoginViewModel.isShowMessger ?View.VISIBLE:View.VISIBLE  }" />
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->LoginViewModel.onclick()}"
+            android:text="login" />
+    </LinearLayout>
+</layout>
